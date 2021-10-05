@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Profile;
+use App\Traits\LockableTrait;
 use App\Models\Scopes\Searchable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -20,6 +22,7 @@ class User extends Authenticatable
     use Searchable;
     use SoftDeletes;
     use HasApiTokens;
+    // use LockableTrait;
 
     protected $fillable = [
         'name',
@@ -76,6 +79,16 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function assignProfile(Profile $profile)
+    {
+        return $this->profiles()->attach($profile);
+    }
+
+    public function removeProfile(Profile $profile)
+    {
+        return $this->profiles()->detach($profile);
     }
 
     public function families()

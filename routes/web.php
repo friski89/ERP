@@ -31,12 +31,14 @@ use App\Http\Controllers\AssignmentHistoryController;
 use App\Http\Controllers\InsuranceFacilityController;
 use App\Http\Controllers\OtherCompetenciesController;
 use App\Http\Controllers\AchievementHistoryController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CompetenceCoreValueController;
 use App\Http\Controllers\SkillsAndProfessionController;
 use App\Http\Controllers\CompetenceFanctionalController;
 use App\Http\Controllers\CompetenceLeadershipController;
 use App\Http\Controllers\EducationalBackgroundController;
 use App\Http\Controllers\PerformanceAppraisalHistoryController;
+use App\Http\Controllers\User\MyProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,13 +51,18 @@ use App\Http\Controllers\PerformanceAppraisalHistoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('locked', [LoginController::class, 'locked'])->middleware('auth')->name('login.locked');
+// Route::post('locked', [LoginController::class, 'unlock'])->middleware('auth')->name('login.unlock');
+Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
+Route::prefix('users')->group(function () {
+    Route::prefix('profile')->middleware('auth')->group(function () {
+        Route::get('', [MyProfileController::class, 'index'])->name('profile');
+        Route::post('', [MyProfileController::class, 'update'])->name('profile.update');
+        Route::post('/change_password', [MyProfileController::class, 'change_password'])->name('profile.change_password');
+    });
+});
 
 Route::prefix('/')
     ->middleware('auth')

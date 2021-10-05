@@ -3,20 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Edu;
-use App\Models\User;
 use App\Models\Unit;
-use App\Models\JobGrade;
+use App\Models\User;
+use App\Models\Profile;
 use App\Models\Division;
+use App\Models\JobGrade;
 use App\Models\JobTitle;
 use App\Models\JobFamily;
 use App\Models\SubStatus;
-use App\Models\CompanyHost;
-use App\Models\CompanyHome;
-use App\Models\JobFunction;
 use App\Models\CityRecuite;
-use Illuminate\Http\Request;
+use App\Models\CompanyHome;
+use App\Models\CompanyHost;
+use App\Models\JobFunction;
 use App\Models\BandPosition;
 use App\Models\WorkLocation;
+use Illuminate\Http\Request;
 use App\Models\StatusEmployee;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -109,6 +110,9 @@ class UserController extends Controller
         $user = User::create($validated);
 
         $user->syncRoles($request->roles);
+        $profile = new Profile();
+        $user->profile()->save($profile);
+        $user->save();
 
         return redirect()
             ->route('users.edit', $user)

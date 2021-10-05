@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- Icons -->
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('backend/vendor/notify/notify.min.css') }}">
     <style>
         .table-scroll {
             /* height: 100px !important; */
@@ -22,19 +23,19 @@
 
     <script src="/js/app.js" defer></script>
     <script src="/js/backend.js" defer></script>
-    <script type="text/javascript" src="https://unpkg.com/moment" defer></script>
+    <script type="text/javascript" src="{{ asset('backend/vendor/moment/moment.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}" defer></script>
     <script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}" defer></script>
+    <script src="{{ asset('backend/vendor/notify/notify.js') }}"></script>
     @stack('js')
     @stack('before-livewire-scripts')
     <livewire:scripts />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" integrity="sha512-G3jAqT2eM4MMkLMyQR5YBhvN5/Da3IG6kqgYqU9zlIH4+2a+GuMdLb5Kpxy6ItMdCfgaKlo2XFhI0dHtMJjoRw==" crossorigin="anonymous"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js" data-turbolinks-eval="false" data-turbo-eval="false"></script> --}}
+    <script src="{{ asset('backend/vendor/turbolink/turbolink.js') }}"></script>
     @stack('after-livewire-scripts')
 
     @stack('alpine-plugins')
     <!-- Alpine Core -->
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+    <script src="{{ asset('backend/vendor/alpine/alpine.min.js') }}" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             Turbolinks.setProgressBarDelay(0);
@@ -80,7 +81,39 @@
         @include('layouts.partials.footer')
     </div>
     <!-- ./wrapper -->
-    @stack('footer_js')
+    @stack('scripts')
+    @if (session()->has('success'))
+    <script>
+        const notyf = new Notyf({dismissible: true})
+        notyf.success('{{ session('success') }}')
+    </script>
+    @endif
+    <script>
+        /* Simple Alpine Image Viewer */
+        function imageViewer(src = '') {
+            return {
+                imageUrl: src,
+
+                refreshUrl() {
+                    this.imageUrl = this.$el.getAttribute("image-url")
+                },
+
+                fileChosen(event) {
+                    this.fileToDataUrl(event, src => this.imageUrl = src)
+                },
+
+                fileToDataUrl(event, callback) {
+                    if (! event.target.files.length) return
+
+                    let file = event.target.files[0],
+                        reader = new FileReader()
+
+                    reader.readAsDataURL(file)
+                    reader.onload = e => callback(e.target.result)
+                },
+            }
+        }
+    </script>
 </body>
 
 </html>

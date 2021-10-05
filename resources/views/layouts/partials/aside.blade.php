@@ -25,11 +25,19 @@
           <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
-              Dashboard
+              Home
             </p>
           </a>
         </li>
-
+        <li class="nav-item">
+          <a href="{{ route('profile') }}" class="nav-link {{ request()->routeIs('profile*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              My Profile
+            </p>
+          </a>
+        </li>
+        @can('Master Data')
         <li class="nav-item has-treeview
         {{ request()->routeIs('company-hosts*') || request()->routeIs('company-homes*') || request()->routeIs('job-titles*') || request()->routeIs('edus*') || request()->routeIs('band-positions*') || request()->routeIs('educational-backgrounds*') || request()->routeIs('divisions*') || request()->routeIs('units*') || request()->routeIs('job-grades*') || request()->routeIs('job-families*') || request()->routeIs('job-functions*') || request()->routeIs('status-employees*') || request()->routeIs('sub-statuses*') || request()->routeIs('city-recuites*') || request()->routeIs('work-locations*') || request()->routeIs('competence-core-values*') || request()->routeIs('competence-leaderships*') || request()->routeIs('competence-fanctionals*') || request()->routeIs('all-other-competencies*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link
@@ -150,6 +158,8 @@
               </li>
             </ul>
         </li>
+        @endcan
+        @can('HRIS')
         <li class="nav-item has-treeview
         {{ request()->routeIs('users*') || request()->routeIs('service-histories*') || request()->routeIs('assignment-histories*') || request()->routeIs('performance-appraisal-histories*') || request()->routeIs('achievement-histories*') || request()->routeIs('educational-backgrounds*') || request()->routeIs('training-histories*') || request()->routeIs('skills-and-professions*') || request()->routeIs('data-thps.index*') || request()->routeIs('all-office-facilities*') || request()->routeIs('insurance-facilities*') || request()->routeIs('cash-benefits*') || request()->routeIs('families*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link
@@ -240,7 +250,33 @@
               </li>
             </ul>
         </li>
+        @endcan
+        @can('management admin')
+        <li class="nav-item has-treeview
+        {{ request()->routeIs('roles*') || request()->routeIs('permissions*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link
+            {{ request()->routeIs('roles*') || request()->routeIs('permissions*') ? 'active' : ''}}">
+              <i class="nav-icon fas fa-briefcase"></i>
+              <p>
+                Admin
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
 
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('roles*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>Roles</p></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('permissions*') ? 'active' : '' }}" href="{{ route('permissions.index') }}">
+                        <i class="nav-icon fas fa-briefcase"></i>
+                        <p>Permission</p></a>
+                </li>
+            </ul>
+        </li>
+        @endcan
         <li class="nav-item">
             @csrf
             <a href="{{ route('logout') }}" data-turbolinks-eval="false" onclick="event.preventDefault();
