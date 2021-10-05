@@ -19,7 +19,7 @@ class EducationalBackground extends Model
         'institution_name',
         'faculty',
         'major',
-        'level_of_edu',
+        'edu_id',
         'graduate_date',
         'cost_category',
         'scholarship_institution',
@@ -45,5 +45,10 @@ class EducationalBackground extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function edu()
+    {
+        return $this->belongsTo(Edu::class);
     }
 }

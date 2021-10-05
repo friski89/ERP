@@ -29,7 +29,7 @@ class EducationalBackgroundUpdateRequest extends FormRequest
             'institution_name' => ['required', 'max:255', 'string'],
             'faculty' => ['required', 'max:255', 'string'],
             'major' => ['required', 'max:255', 'string'],
-            'level_of_edu' => ['required', 'in:s3,s2,s1,d3,d2,d1'],
+            'edu_id' => ['required', 'exists:edus,id'],
             'graduate_date' => ['required', 'date'],
             'cost_category' => ['required', 'max:255', 'string'],
             'scholarship_institution' => ['nullable', 'max:255', 'string'],

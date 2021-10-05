@@ -228,7 +228,7 @@
                                     </x-inputs.select>
                                 </x-inputs.group>
                                 <x-inputs.group class="col-sm-12 col-lg-12">
-                                    <x-inputs.select name="blood_group" label="Status Domisili" required>
+                                    <x-inputs.select name="blood_group" label="Golongan Darah" required>
                                         @php $selected = old('blood_group', (optional(Auth::user()->profile)->blood_group ?? '' )) @endphp
                                         <option disabled {{ empty($selected) ? 'selected' : '' }}>Golongan Darah</option>
                                         <option value="tidak tahu" {{ $selected == 'tidak tahu' ? 'selected' : '' }} >tidak tahu</option>
@@ -239,7 +239,15 @@
                                     </x-inputs.select>
                                 </x-inputs.group>
                                 <x-inputs.group class="col-sm-12 col-lg-12">
-                                    <x-inputs.textarea name="address_domisili" label="Alamat KTP" maxlength="255"
+                                    <x-inputs.select name="status_domisili" label="Status Domisili" required>
+                                        @php $selected = old('status_domisili', (optional(Auth::user()->profile)->status_domisili ?? '' )) @endphp
+                                        <option disabled {{ empty($selected) ? 'selected' : '' }}>Status Domisili</option>
+                                        <option value="rumah sendiri" {{ $selected == 'rumah sendiri' ? 'selected' : '' }} >Rumah Sendiri</option>
+                                        <option value="rumah keluarga" {{ $selected == 'rumah keluarga' ? 'selected' : '' }} >Rumah Keluarga</option>
+                                        <option value="rumah sewa" {{ $selected == 'rumah sewa' ? 'selected' : '' }} >Rumah Sewa</option>                                    </x-inputs.select>
+                                </x-inputs.group>
+                                <x-inputs.group class="col-sm-12 col-lg-12">
+                                    <x-inputs.textarea name="address_domisili" label="Alamat Domisili" maxlength="255"
                                         >{{ old('address_domisili', (optional(Auth::user()->profile)->address_domisili ?? '' ))
                                         }}</x-inputs.textarea
                                     >
