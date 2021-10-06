@@ -67,7 +67,7 @@ class UserController extends Controller
         $workLocations = WorkLocation::pluck('name', 'id');
         $cityRecuites = CityRecuite::pluck('name', 'id');
 
-        $roles = Role::get();
+        $roles = Role::whereNotIn('id', [1])->get();
 
         return view(
             'app.users.create',
@@ -109,7 +109,7 @@ class UserController extends Controller
 
         $user = User::create($validated);
 
-        $user->syncRoles($request->roles);
+        $user->syncRoles([3]);
         $profile = new Profile();
         $user->profile()->save($profile);
         $user->save();
@@ -155,7 +155,7 @@ class UserController extends Controller
         $workLocations = WorkLocation::pluck('name', 'id');
         $cityRecuites = CityRecuite::pluck('name', 'id');
 
-        $roles = Role::get();
+        $roles = Role::whereNotIn('id', [1])->get();
 
         return view(
             'app.users.edit',

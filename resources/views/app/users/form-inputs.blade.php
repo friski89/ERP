@@ -287,10 +287,7 @@
             @endforeach
         </x-inputs.select>
     </x-inputs.group>
-    <div class="py-3">
-        <h4>Access User</h4>
-    </div>
-    <x-inputs.group class="col-sm-12">
+    {{-- <x-inputs.group class="col-sm-12">
         <x-inputs.password
             name="password"
             label="Password"
@@ -298,9 +295,9 @@
             placeholder="{{ empty($editing) ? 'By Default admedika321' : 'Password' }}"
             :required="!$editing"
         ></x-inputs.password>
-    </x-inputs.group>
+    </x-inputs.group> --}}
 
-    <div class="form-group col-sm-12 mt-4">
+    {{-- <div class="form-group col-sm-12 mt-4">
         <h4>Assign @lang('crud.roles.name')</h4>
 
         @foreach ($roles as $role)
@@ -315,5 +312,5 @@
             ></x-inputs.checkbox>
         </div>
         @endforeach
-    </div>
+    </div> --}}
 </div>

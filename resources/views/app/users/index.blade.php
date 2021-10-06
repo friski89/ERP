@@ -17,6 +17,17 @@
     </div><!-- /.container-fluid -->
 </div>
     <div class="container">
+        @if (isset($errors) && $errors->any())
+        <div class="card-alert card red">
+            <div class="alert alert-danger" role="alert">
+            <p>
+                @foreach ($errors->all() as $error)
+                    {{ $error }}
+                @endforeach
+            </p>
+            </div>
+        </div>
+        @endif
     <div class="card">
         <div class="card-body">
             <div style="display: flex; justify-content: space-between;">
@@ -25,7 +36,7 @@
 
             <div class="searchbar mt-4 mb-5">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <form>
                             <div class="input-group">
                                 <input
@@ -48,16 +59,48 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-6 text-right">
-                        @can('create', App\Models\User::class)
-                        <a
-                            href="{{ route('users.create') }}"
-                            class="btn btn-primary"
-                        >
-                            <i class="icon ion-md-add"></i>
-                            @lang('crud.common.create')
-                        </a>
-                        @endcan
+                    {{-- <div class="col-md-4">
+
+                    </div> --}}
+                    <div class="col-md-8">
+                        <div class="row justify-content-end">
+                            <div class="mr-4">
+                                <form action="{{ route('import.employee.all') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" name="file" id="file">
+                                            <label class="custom-file-label" for="file">Choose file</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <button type="submit" class="input-group-text bg-red">Upload</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="mr-4">
+                                <a
+                                    href="{{ route('export.employee.all') }}"
+                                    class="btn btn-success" target="_blank"
+                                >
+                                    <i class="icon ion-md-add"></i>
+                                    Export
+                                </a>
+                            </div>
+                            @can('create', App\Models\User::class)
+                            <div class="mr-2">
+                                <a
+                                    href="{{ route('users.create') }}"
+                                    class="btn btn-primary"
+                                >
+                                    <i class="icon ion-md-add"></i>
+                                    @lang('crud.common.create')
+                                </a>
+                            </div>
+                            @endcan
+                        </div>
                     </div>
                 </div>
             </div>

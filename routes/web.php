@@ -31,12 +31,13 @@ use App\Http\Controllers\AssignmentHistoryController;
 use App\Http\Controllers\InsuranceFacilityController;
 use App\Http\Controllers\OtherCompetenciesController;
 use App\Http\Controllers\AchievementHistoryController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CompetenceCoreValueController;
 use App\Http\Controllers\SkillsAndProfessionController;
 use App\Http\Controllers\CompetenceFanctionalController;
 use App\Http\Controllers\CompetenceLeadershipController;
 use App\Http\Controllers\EducationalBackgroundController;
+use App\Http\Controllers\export\UserExportController;
+use App\Http\Controllers\export\UserImportController;
 use App\Http\Controllers\PerformanceAppraisalHistoryController;
 use App\Http\Controllers\User\DataKeluargaController;
 use App\Http\Controllers\User\MyProfileController;
@@ -58,6 +59,12 @@ Auth::routes();
 // Route::get('locked', [LoginController::class, 'locked'])->middleware('auth')->name('login.locked');
 // Route::post('locked', [LoginController::class, 'unlock'])->middleware('auth')->name('login.unlock');
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
+Route::prefix('export')->middleware('permission:export users')->group(function () {
+    Route::prefix('employee')->group(function () {
+        Route::get('export', [UserExportController::class, 'all_users'])->name('export.employee.all');
+        Route::post('import', [UserImportController::class, 'store'])->name('import.employee.all');
+    });
+});
 Route::prefix('users')->group(function () {
     Route::prefix('riwayat_pendidikan')->middleware('auth')->group(function () {
         Route::get('', [RiwayatPendidikanController::class, 'index'])->name('users.pendidikan.create');

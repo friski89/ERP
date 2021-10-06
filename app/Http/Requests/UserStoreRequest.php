@@ -59,8 +59,8 @@ class UserStoreRequest extends FormRequest
             'age' => ['required', 'numeric'],
             'work_location_id' => ['required', 'exists:work_locations,id'],
             'city_recuite_id' => ['required', 'exists:city_recuites,id'],
-            'password' => ['required'],
-            'roles' => 'array',
+            'password' => ['nullable'],
+            // 'roles' => 'array',
         ];
     }
 }
