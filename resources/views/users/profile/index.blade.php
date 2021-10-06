@@ -270,15 +270,13 @@
 
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        @can('create', App\Models\EducationalBackground::class)
                                         <a
-                                            href="{{ route('educational-backgrounds.create') }}"
+                                            href="{{ route('users.pendidikan.create') }}"
                                             class="btn btn-primary"
                                         >
                                             <i class="icon ion-md-add"></i>
                                             @lang('crud.common.create')
                                         </a>
-                                        @endcan
                                     </div>
                                 </div>
                             </div>
@@ -328,7 +326,7 @@
                                                         >
                                                             @can('update', $pendidikan)
                                                             <a
-                                                                href="{{ route('educational-backgrounds.edit', $pendidikan) }}"
+                                                                href="{{ route('users.pendidikan.edit', $pendidikan) }}"
                                                             >
                                                                 <button
                                                                     type="button"
@@ -340,7 +338,7 @@
                                                             @endcan  @can('delete',
                                                             $pendidikan)
                                                             <form
-                                                                action="{{ route('educational-backgrounds.destroy', $pendidikan) }}"
+                                                                action="{{ route('users.pendidikan.destroy', $pendidikan) }}"
                                                                 method="POST"
                                                                 onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
                                                             >

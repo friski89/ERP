@@ -39,6 +39,7 @@ use App\Http\Controllers\CompetenceLeadershipController;
 use App\Http\Controllers\EducationalBackgroundController;
 use App\Http\Controllers\PerformanceAppraisalHistoryController;
 use App\Http\Controllers\User\MyProfileController;
+use App\Http\Controllers\User\RiwayatPendidikanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,13 @@ Auth::routes();
 // Route::post('locked', [LoginController::class, 'unlock'])->middleware('auth')->name('login.unlock');
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
 Route::prefix('users')->group(function () {
+    Route::prefix('riwayat_pendidikan')->middleware('auth')->group(function () {
+        Route::get('', [RiwayatPendidikanController::class, 'index'])->name('users.pendidikan.create');
+        Route::post('', [RiwayatPendidikanController::class, 'store'])->name('users.pendidikan.store');
+        Route::get('{educationalBackground}/edit', [RiwayatPendidikanController::class, 'edit'])->name('users.pendidikan.edit');
+        Route::put('{educationalBackground}', [RiwayatPendidikanController::class, 'update'])->name('users.pendidikan.update');
+        Route::delete('{educationalBackground}', [RiwayatPendidikanController::class, 'destroy'])->name('users.pendidikan.destroy');
+    });
     Route::prefix('profile')->middleware('auth')->group(function () {
         Route::get('', [MyProfileController::class, 'index'])->name('profile');
         Route::post('', [MyProfileController::class, 'update'])->name('profile.update');
