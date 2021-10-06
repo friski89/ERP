@@ -20,7 +20,6 @@ class CreateEducationalBackgroundsTable extends Migration
             $table->string('institution_name');
             $table->string('faculty');
             $table->string('major');
-            $table->enum('level_of_edu', ['S3', 'S2', 'S1', 'D3', 'D2', 'D1']);
             $table->date('graduate_date');
             $table->string('cost_category');
             $table->string('scholarship_institution')->nullable();
