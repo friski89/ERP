@@ -5,10 +5,10 @@
         <x-inputs.text
             name="employee_name"
             label="Nama Karyawan"
-            value="{{ old('employee_name', ($editing ? $family->employee_name : '')) }}"
+            value="{{ Auth::user()->name }}"
             maxlength="255"
             placeholder="Nama Karyawan"
-            required
+            readonly
         ></x-inputs.text>
     </x-inputs.group>
 
@@ -16,10 +16,10 @@
         <x-inputs.text
             name="emp_no"
             label="Nik Karyawan"
-            value="{{ old('emp_no', ($editing ? $family->emp_no : '')) }}"
+            value="{{ Auth::user()->nik_company }}"
             maxlength="255"
             placeholder="Emp No"
-            required
+            readonly
         ></x-inputs.text>
     </x-inputs.group>
 
@@ -90,9 +90,9 @@
     <x-inputs.group class="col-sm-12 col-lg-4">
         <x-inputs.select name="gender" label="Jenis Kelamin">
             @php $selected = old('gender', ($editing ? $family->gender : '')) @endphp
-            <option value="male" {{ $selected == 'male' ? 'selected' : '' }} >Male</option>
-            <option value="female" {{ $selected == 'female' ? 'selected' : '' }} >Female</option>
-            <option value="other" {{ $selected == 'other' ? 'selected' : '' }} >Other</option>
+            <option value="Male" {{ $selected == 'Male' ? 'selected' : '' }} >Male</option>
+            <option value="Female" {{ $selected == 'Female' ? 'selected' : '' }} >Female</option>
+            <option value="Other" {{ $selected == 'Other' ? 'selected' : '' }} >Other</option>
         </x-inputs.select>
     </x-inputs.group>
 
@@ -130,7 +130,7 @@
     <x-inputs.group class="col-sm-12 col-lg-4">
         <x-inputs.select name="edu_id" label="Pendidikan" required>
             @php $selected = old('edu_id', ($editing ? $family->edu_id : '')) @endphp
-            <option disabled {{ empty($selected) ? 'selected' : '' }}>Please select the Edu</option>
+            <option disabled {{ empty($selected) ? 'selected' : '' }}>Pilih Pendidikan</option>
             @foreach($edus as $value => $label)
             <option value="{{ $value }}" {{ $selected == $value ? 'selected' : '' }} >{{ $label }}</option>
             @endforeach
@@ -146,18 +146,13 @@
             placeholder="Pekerjaan"
         ></x-inputs.text>
     </x-inputs.group>
-
     <x-inputs.group class="col-sm-12 col-lg-4">
-        <x-inputs.number
-            name="health_status"
-            label="Status Tanggungan Kesehatan"
-            value="{{ old('health_status', ($editing ? $family->health_status : '')) }}"
-            max="255"
-            placeholder="Status Tanggungan Kesehatan"
-            required
-        ></x-inputs.number>
+        <x-inputs.select name="health_status" label="Status Tanggungan Kesehatan">
+            @php $selected = old('health_status', ($editing ? $family->health_status : '')) @endphp
+            <option value="0" {{ $selected == 0 ? 'selected' : '' }} >Tidak</option>
+            <option value="1" {{ $selected == 1 ? 'selected' : '' }} >Ya</option>
+        </x-inputs.select>
     </x-inputs.group>
-
     <x-inputs.group class="col-sm-12 col-lg-4">
         <x-inputs.select name="blood_group" label="Golangan Darah">
             @php $selected = old('blood_group', ($editing ? $family->blood_group : '')) @endphp
@@ -263,14 +258,11 @@
     </x-inputs.group>
 
     <x-inputs.group class="col-sm-12 col-lg-4">
-        <x-inputs.number
-            name="alive"
-            label="Alive"
-            value="{{ old('alive', ($editing ? $family->alive : '')) }}"
-            max="255"
-            placeholder="Alive"
-            required
-        ></x-inputs.number>
+        <x-inputs.select name="alive" label="Alive">
+            @php $selected = old('alive', ($editing ? $family->alive : '')) @endphp
+            <option value="0" {{ $selected == 0 ? 'selected' : '' }} >Tidak</option>
+            <option value="1" {{ $selected == 1 ? 'selected' : '' }} >Ya</option>
+        </x-inputs.select>
     </x-inputs.group>
 
     <x-inputs.group class="col-sm-12 col-lg-4">
@@ -285,23 +277,18 @@
     </x-inputs.group>
 
     <x-inputs.group class="col-sm-12 col-lg-4">
-        <x-inputs.number
-            name="dependent_status"
-            label="Dependent Status"
-            value="{{ old('dependent_status', ($editing ? $family->dependent_status : '')) }}"
-            max="255"
-            placeholder="Dependent Status"
-            required
-        ></x-inputs.number>
+        <x-inputs.select name="dependent_status" label="Dependent Status">
+            @php $selected = old('dependent_status', ($editing ? $family->dependent_status : '')) @endphp
+            <option value="0" {{ $selected == 0 ? 'selected' : '' }} >Tidak</option>
+            <option value="1" {{ $selected == 1 ? 'selected' : '' }} >Ya</option>
+        </x-inputs.select>
     </x-inputs.group>
 
     <x-inputs.group class="col-sm-12">
-        <x-inputs.select name="user_id" label="User" required>
-            @php $selected = old('user_id', ($editing ? $family->user_id : '')) @endphp
-            <option disabled {{ empty($selected) ? 'selected' : '' }}>Please select the User</option>
-            @foreach($users as $value => $label)
-            <option value="{{ $value }}" {{ $selected == $value ? 'selected' : '' }} >{{ $label }}</option>
-            @endforeach
-        </x-inputs.select>
+        <x-inputs.hidden
+            name="user_id"
+            value="{{ Auth::user()->id }}"
+            required
+        ></x-inputs.hidden>
     </x-inputs.group>
 </div>

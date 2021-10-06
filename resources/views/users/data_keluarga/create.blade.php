@@ -22,7 +22,7 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">
-                <a href="{{ route('families.index') }}" class="mr-4"
+                <a href="{{ route('profile') }}" class="mr-4"
                     ><i class="icon ion-md-arrow-back"></i
                 ></a>
                 Create Riwayat Keluarga
@@ -30,14 +30,14 @@
 
             <x-form
                 method="POST"
-                action="{{ route('families.store') }}"
+                action="{{ route('users.keluarga.store') }}"
                 class="mt-4"
             >
-                @include('app.families.form-inputs')
+                @include('users.data_keluarga.form-inputs')
 
                 <div class="mt-4">
                     <a
-                        href="{{ route('families.index') }}"
+                        href="{{ route('profile') }}"
                         class="btn btn-light"
                     >
                         <i class="icon ion-md-return-left text-primary"></i>

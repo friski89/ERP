@@ -22,7 +22,7 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">
-                <a href="{{ route('families.index') }}" class="mr-4"
+                <a href="{{ route('profile') }}" class="mr-4"
                     ><i class="icon ion-md-arrow-back"></i
                 ></a>
                 Edit Riwayat Keluarga
@@ -30,14 +30,14 @@
 
             <x-form
                 method="PUT"
-                action="{{ route('families.update', $family) }}"
+                action="{{ route('users.keluarga.update', $family) }}"
                 class="mt-4"
             >
-                @include('app.families.form-inputs')
+                @include('users.data_keluarga.form-inputs')
 
                 <div class="mt-4">
                     <a
-                        href="{{ route('families.index') }}"
+                        href="{{ route('profile') }}"
                         class="btn btn-light"
                     >
                         <i class="icon ion-md-return-left text-primary"></i>
@@ -45,7 +45,7 @@
                     </a>
 
                     <a
-                        href="{{ route('families.create') }}"
+                        href="{{ route('users.keluarga.create') }}"
                         class="btn btn-light"
                     >
                         <i class="icon ion-md-add text-primary"></i>

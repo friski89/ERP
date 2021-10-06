@@ -38,6 +38,7 @@ use App\Http\Controllers\CompetenceFanctionalController;
 use App\Http\Controllers\CompetenceLeadershipController;
 use App\Http\Controllers\EducationalBackgroundController;
 use App\Http\Controllers\PerformanceAppraisalHistoryController;
+use App\Http\Controllers\User\DataKeluargaController;
 use App\Http\Controllers\User\MyProfileController;
 use App\Http\Controllers\User\RiwayatPendidikanController;
 
@@ -64,6 +65,13 @@ Route::prefix('users')->group(function () {
         Route::get('{educationalBackground}/edit', [RiwayatPendidikanController::class, 'edit'])->name('users.pendidikan.edit');
         Route::put('{educationalBackground}', [RiwayatPendidikanController::class, 'update'])->name('users.pendidikan.update');
         Route::delete('{educationalBackground}', [RiwayatPendidikanController::class, 'destroy'])->name('users.pendidikan.destroy');
+    });
+    Route::prefix('data_keluarga')->middleware('auth')->group(function () {
+        Route::get('', [DataKeluargaController::class, 'index'])->name('users.keluarga.create');
+        Route::post('', [DataKeluargaController::class, 'store'])->name('users.keluarga.store');
+        Route::get('{family}/edit', [DataKeluargaController::class, 'edit'])->name('users.keluarga.edit');
+        Route::put('{family}', [DataKeluargaController::class, 'update'])->name('users.keluarga.update');
+        Route::delete('{family}', [DataKeluargaController::class, 'destroy'])->name('users.keluarga.destroy');
     });
     Route::prefix('profile')->middleware('auth')->group(function () {
         Route::get('', [MyProfileController::class, 'index'])->name('profile');
