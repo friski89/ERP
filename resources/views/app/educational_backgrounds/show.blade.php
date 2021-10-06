@@ -65,10 +65,10 @@
                 </div>
                 <div class="mb-4">
                     <h5>
-                        @lang('crud.educational_backgrounds.inputs.level_of_edu')
+                        @lang('crud.educational_backgrounds.inputs.edu_id')
                     </h5>
                     <span
-                        >{{ $educationalBackground->level_of_edu ?? '-' }}</span
+                        >{{ optional($educationalBackground->edu)->name ?? '-' }}</span
                     >
                 </div>
                 <div class="mb-4">

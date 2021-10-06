@@ -264,10 +264,240 @@
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="riwayatPendidikan">
                             <h4>Riwayat Pendidikan</h4>
+                            <div class="searchbar mt-4 mb-5">
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        @can('create', App\Models\EducationalBackground::class)
+                                        <a
+                                            href="{{ route('educational-backgrounds.create') }}"
+                                            class="btn btn-primary"
+                                        >
+                                            <i class="icon ion-md-add"></i>
+                                            @lang('crud.common.create')
+                                        </a>
+                                        @endcan
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-left">
+                                                        @lang('crud.educational_backgrounds.inputs.edu_id')
+                                                    </th>
+                                                    <th class="text-left">
+                                                        @lang('crud.educational_backgrounds.inputs.institution_name')
+                                                    </th>
+                                                    <th class="text-left">
+                                                        @lang('crud.educational_backgrounds.inputs.faculty')
+                                                    </th>
+                                                    <th class="text-left">
+                                                        @lang('crud.educational_backgrounds.inputs.major')
+                                                    </th>
+                                                    <th class="text-center">
+                                                        @lang('crud.common.actions')
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @forelse(Auth::user()->educationalBackgrounds as $pendidikan)
+                                                <tr>
+                                                    <td>
+                                                        {{ optional($pendidikan->edu)->name ?? '-'
+                                                        }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $pendidikan->institution_name ??
+                                                        '-' }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $pendidikan->faculty ?? '-' }}
+                                                    </td>
+                                                    <td>{{ $pendidikan->major ?? '-' }}</td>
+                                                    <td class="text-center" style="width: 134px;">
+                                                        <div
+                                                            role="group"
+                                                            aria-label="Row Actions"
+                                                            class="btn-group"
+                                                        >
+                                                            @can('update', $pendidikan)
+                                                            <a
+                                                                href="{{ route('educational-backgrounds.edit', $pendidikan) }}"
+                                                            >
+                                                                <button
+                                                                    type="button"
+                                                                    class="btn btn-light"
+                                                                >
+                                                                    <i class="icon ion-md-create"></i>
+                                                                </button>
+                                                            </a>
+                                                            @endcan  @can('delete',
+                                                            $pendidikan)
+                                                            <form
+                                                                action="{{ route('educational-backgrounds.destroy', $pendidikan) }}"
+                                                                method="POST"
+                                                                onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
+                                                            >
+                                                                @csrf @method('DELETE')
+                                                                <button
+                                                                    type="submit"
+                                                                    class="btn btn-light text-danger"
+                                                                >
+                                                                    <i class="icon ion-md-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                            @endcan
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @empty
+                                                <tr>
+                                                    <td colspan="5">
+                                                        @lang('crud.common.no_items_found')
+                                                    </td>
+                                                </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="dataKeluarga">
-                            Data Keluarga
+                            <h4>Data Keluarga</h4>
+                            <div class="searchbar mt-4 mb-5">
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        @can('create', App\Models\Family::class)
+                                        <a
+                                            href="{{ route('families.create') }}"
+                                            class="btn btn-primary"
+                                        >
+                                            <i class="icon ion-md-add"></i>
+                                            @lang('crud.common.create')
+                                        </a>
+                                        @endcan
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-left">
+                                                        @lang('crud.families.inputs.family_name')
+                                                    </th>
+                                                    <th class="text-left">
+                                                        @lang('crud.families.inputs.nik_id')
+                                                    </th>
+                                                    <th class="text-left">
+                                                        @lang('crud.families.inputs.place_of_birth')
+                                                    </th>
+                                                    <th class="text-left">
+                                                        @lang('crud.families.inputs.date_of_birth')
+                                                    </th>
+                                                    <th class="text-left">
+                                                        @lang('crud.families.inputs.gender')
+                                                    </th>
+                                                    <th class="text-left">
+                                                        @lang('crud.families.inputs.religion')
+                                                    </th>
+                                                    <th class="text-left">
+                                                        @lang('crud.families.inputs.citizenship')
+                                                    </th>
+                                                    <th class="text-left">
+                                                        @lang('crud.families.inputs.edu_id')
+                                                    </th>
+                                                    <th class="text-left">
+                                                        @lang('crud.families.inputs.relationship')
+                                                    </th>
+                                                    <th class="text-right">
+                                                        @lang('crud.families.inputs.urutan')
+                                                    </th>
+                                                    <th class="text-right">
+                                                        @lang('crud.families.inputs.dependent_status')
+                                                    </th>
+                                                    <th class="text-center">
+                                                        @lang('crud.common.actions')
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @forelse(Auth::user()->families as $family)
+                                                <tr>
+
+                                                    <td>{{ $family->family_name ?? '-' }}</td>
+                                                    <td>{{ $family->nik_id ?? '-' }}</td>
+                                                    <td>{{ $family->place_of_birth ?? '-' }}</td>
+                                                    <td>{{ $family->date_of_birth ?? '-' }}</td>
+                                                    <td>{{ $family->gender ?? '-' }}</td>
+                                                    <td>{{ $family->religion ?? '-' }}</td>
+                                                    <td>{{ $family->citizenship ?? '-' }}</td>
+                                                    <td>{{ optional($family->edu)->name ?? '-' }}</td>
+                                                    <td>{{ $family->relationship ?? '-' }}</td>
+                                                    <td>{{ $family->urutan ?? '-' }}</td>
+                                                    <td>{{ $family->dependent_status ?? '-' }}</td>
+                                                    <td class="text-center" style="width: 134px;">
+                                                        <div
+                                                            role="group"
+                                                            aria-label="Row Actions"
+                                                            class="btn-group"
+                                                        >
+                                                            @can('update', $family)
+                                                            <a
+                                                                href="{{ route('families.edit', $family) }}"
+                                                            >
+                                                                <button
+                                                                    type="button"
+                                                                    class="btn btn-light"
+                                                                >
+                                                                    <i class="icon ion-md-create"></i>
+                                                                </button>
+                                                            </a>
+                                                            @endcan @can('delete', $family)
+                                                            <form
+                                                                action="{{ route('families.destroy', $family) }}"
+                                                                method="POST"
+                                                                onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
+                                                            >
+                                                                @csrf @method('DELETE')
+                                                                <button
+                                                                    type="submit"
+                                                                    class="btn btn-light text-danger"
+                                                                >
+                                                                    <i class="icon ion-md-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                            @endcan
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @empty
+                                                <tr>
+                                                    <td colspan="12">
+                                                        @lang('crud.common.no_items_found')
+                                                    </td>
+                                                </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="settings">
@@ -332,7 +562,7 @@
                     </div>
                     <!-- /.card -->
 
-                <div class="row gutters-sm">
+                {{-- <div class="row gutters-sm">
                 <div class="col-sm-6 mb-3">
                     <div class="card h-100">
                     <div class="card-body">
@@ -387,7 +617,7 @@
                     </div>
                     </div>
                 </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

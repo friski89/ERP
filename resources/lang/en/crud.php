@@ -298,7 +298,7 @@ return [
             'institution_name' => 'Nama Institusi',
             'faculty' => 'Fakultas',
             'major' => 'Jurusan',
-            'level_of_edu' => 'Tingkat Pendidikan',
+            'edu_id' => 'Pendidikan Terakhir',
             'graduate_date' => 'Tanggal Lulus',
             'cost_category' => 'Kategori Biaya',
             'scholarship_institution' => 'Institusi Pemberi Beasiswa',

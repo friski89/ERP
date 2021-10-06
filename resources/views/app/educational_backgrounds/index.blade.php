@@ -84,7 +84,7 @@
                                 @lang('crud.educational_backgrounds.inputs.major')
                             </th>
                             <th class="text-left">
-                                @lang('crud.educational_backgrounds.inputs.level_of_edu')
+                                @lang('crud.educational_backgrounds.inputs.edu_id')
                             </th>
                             <th class="text-left">
                                 @lang('crud.educational_backgrounds.inputs.graduate_date')
@@ -141,10 +141,7 @@
                                 {{ $educationalBackground->faculty ?? '-' }}
                             </td>
                             <td>{{ $educationalBackground->major ?? '-' }}</td>
-                            <td>
-                                {{ $educationalBackground->level_of_edu ?? '-'
-                                }}
-                            </td>
+                            <td>{{ optional($educationalBackground->edu)->name ?? '-' }}</td>
                             <td>
                                 {{ $educationalBackground->graduate_date ?? '-'
                                 }}

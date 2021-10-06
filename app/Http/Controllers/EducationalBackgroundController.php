@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Edu;
 use Illuminate\Http\Request;
 use App\Models\EducationalBackground;
 use App\Http\Requests\EducationalBackgroundStoreRequest;
@@ -39,8 +40,9 @@ class EducationalBackgroundController extends Controller
         $this->authorize('create', EducationalBackground::class);
 
         $users = User::pluck('name', 'id');
+        $edus = Edu::pluck('name', 'id');
 
-        return view('app.educational_backgrounds.create', compact('users'));
+        return view('app.educational_backgrounds.create', compact('users', 'edus'));
     }
 
     /**
@@ -89,10 +91,11 @@ class EducationalBackgroundController extends Controller
         $this->authorize('update', $educationalBackground);
 
         $users = User::pluck('name', 'id');
+        $edus = Edu::pluck('name', 'id');
 
         return view(
             'app.educational_backgrounds.edit',
-            compact('educationalBackground', 'users')
+            compact('educationalBackground', 'users', 'edus')
         );
     }
 

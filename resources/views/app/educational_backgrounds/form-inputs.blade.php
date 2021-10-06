@@ -57,14 +57,12 @@
     </x-inputs.group>
 
     <x-inputs.group class="col-sm-12 col-lg-4">
-        <x-inputs.select name="level_of_edu" label="Tingkat Pendidikan">
-            @php $selected = old('level_of_edu', ($editing ? $educationalBackground->level_of_edu : '')) @endphp
-            <option value="S3" {{ $selected == 'S3' ? 'selected' : '' }} >S3</option>
-            <option value="S2" {{ $selected == 'S2' ? 'selected' : '' }} >S2</option>
-            <option value="S1" {{ $selected == 'S1' ? 'selected' : '' }} >S1</option>
-            <option value="D3" {{ $selected == 'D3' ? 'selected' : '' }} >D3</option>
-            <option value="D2" {{ $selected == 'D2' ? 'selected' : '' }} >D2</option>
-            <option value="D1" {{ $selected == 'D1' ? 'selected' : '' }} >D1</option>
+        <x-inputs.select name="edu_id" label="Tingkat Pendidikan" required>
+            @php $selected = old('edu_id', ($editing ? $educationalBackground->edu_id : '')) @endphp
+            <option disabled {{ empty($selected) ? 'selected' : '' }}>Tingkat Pendidikan</option>
+            @foreach($edus as $value => $label)
+            <option value="{{ $value }}" {{ $selected == $value ? 'selected' : '' }} >{{ $label }}</option>
+            @endforeach
         </x-inputs.select>
     </x-inputs.group>
 
