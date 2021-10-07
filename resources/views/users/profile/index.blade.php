@@ -270,15 +270,13 @@
 
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        @can('create', App\Models\EducationalBackground::class)
                                         <a
-                                            href="{{ route('educational-backgrounds.create') }}"
+                                            href="{{ route('users.pendidikan.create') }}"
                                             class="btn btn-primary"
                                         >
                                             <i class="icon ion-md-add"></i>
                                             @lang('crud.common.create')
                                         </a>
-                                        @endcan
                                     </div>
                                 </div>
                             </div>
@@ -326,9 +324,8 @@
                                                             aria-label="Row Actions"
                                                             class="btn-group"
                                                         >
-                                                            @can('update', $pendidikan)
                                                             <a
-                                                                href="{{ route('educational-backgrounds.edit', $pendidikan) }}"
+                                                                href="{{ route('users.pendidikan.edit', $pendidikan) }}"
                                                             >
                                                                 <button
                                                                     type="button"
@@ -337,10 +334,8 @@
                                                                     <i class="icon ion-md-create"></i>
                                                                 </button>
                                                             </a>
-                                                            @endcan  @can('delete',
-                                                            $pendidikan)
                                                             <form
-                                                                action="{{ route('educational-backgrounds.destroy', $pendidikan) }}"
+                                                                action="{{ route('users.pendidikan.destroy', $pendidikan) }}"
                                                                 method="POST"
                                                                 onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
                                                             >
@@ -352,7 +347,6 @@
                                                                     <i class="icon ion-md-trash"></i>
                                                                 </button>
                                                             </form>
-                                                            @endcan
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -379,15 +373,13 @@
 
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        @can('create', App\Models\Family::class)
                                         <a
-                                            href="{{ route('families.create') }}"
+                                            href="{{ route('users.keluarga.create') }}"
                                             class="btn btn-primary"
                                         >
                                             <i class="icon ion-md-add"></i>
                                             @lang('crud.common.create')
                                         </a>
-                                        @endcan
                                     </div>
                                 </div>
                             </div>
@@ -449,16 +441,15 @@
                                                     <td>{{ optional($family->edu)->name ?? '-' }}</td>
                                                     <td>{{ $family->relationship ?? '-' }}</td>
                                                     <td>{{ $family->urutan ?? '-' }}</td>
-                                                    <td>{{ $family->dependent_status ?? '-' }}</td>
+                                                    <td>{{ $family->dependent_status == 1 ? 'YA' : 'Tidak' }}</td>
                                                     <td class="text-center" style="width: 134px;">
                                                         <div
                                                             role="group"
                                                             aria-label="Row Actions"
                                                             class="btn-group"
                                                         >
-                                                            @can('update', $family)
                                                             <a
-                                                                href="{{ route('families.edit', $family) }}"
+                                                                href="{{ route('users.keluarga.edit', $family) }}"
                                                             >
                                                                 <button
                                                                     type="button"
@@ -467,9 +458,8 @@
                                                                     <i class="icon ion-md-create"></i>
                                                                 </button>
                                                             </a>
-                                                            @endcan @can('delete', $family)
                                                             <form
-                                                                action="{{ route('families.destroy', $family) }}"
+                                                                action="{{ route('users.keluarga.destroy', $family) }}"
                                                                 method="POST"
                                                                 onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
                                                             >
@@ -481,7 +471,6 @@
                                                                     <i class="icon ion-md-trash"></i>
                                                                 </button>
                                                             </form>
-                                                            @endcan
                                                         </div>
                                                     </td>
                                                 </tr>

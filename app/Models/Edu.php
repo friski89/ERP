@@ -23,6 +23,11 @@ class Edu extends Model
         return $this->hasMany(User::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function educationalBackgrounds()
     {
         return $this->hasMany(EducationalBackground::class);

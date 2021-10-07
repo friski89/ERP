@@ -31,14 +31,17 @@ use App\Http\Controllers\AssignmentHistoryController;
 use App\Http\Controllers\InsuranceFacilityController;
 use App\Http\Controllers\OtherCompetenciesController;
 use App\Http\Controllers\AchievementHistoryController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CompetenceCoreValueController;
 use App\Http\Controllers\SkillsAndProfessionController;
 use App\Http\Controllers\CompetenceFanctionalController;
 use App\Http\Controllers\CompetenceLeadershipController;
 use App\Http\Controllers\EducationalBackgroundController;
+use App\Http\Controllers\export\UserExportController;
+use App\Http\Controllers\export\UserImportController;
 use App\Http\Controllers\PerformanceAppraisalHistoryController;
+use App\Http\Controllers\User\DataKeluargaController;
 use App\Http\Controllers\User\MyProfileController;
+use App\Http\Controllers\User\RiwayatPendidikanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +59,27 @@ Auth::routes();
 // Route::get('locked', [LoginController::class, 'locked'])->middleware('auth')->name('login.locked');
 // Route::post('locked', [LoginController::class, 'unlock'])->middleware('auth')->name('login.unlock');
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
+Route::prefix('export')->middleware('permission:export users')->group(function () {
+    Route::prefix('employee')->group(function () {
+        Route::get('export', [UserExportController::class, 'all_users'])->name('export.employee.all');
+        Route::post('import', [UserImportController::class, 'store'])->name('import.employee.all');
+    });
+});
 Route::prefix('users')->group(function () {
+    Route::prefix('riwayat_pendidikan')->middleware('auth')->group(function () {
+        Route::get('', [RiwayatPendidikanController::class, 'index'])->name('users.pendidikan.create');
+        Route::post('', [RiwayatPendidikanController::class, 'store'])->name('users.pendidikan.store');
+        Route::get('{educationalBackground}/edit', [RiwayatPendidikanController::class, 'edit'])->name('users.pendidikan.edit');
+        Route::put('{educationalBackground}', [RiwayatPendidikanController::class, 'update'])->name('users.pendidikan.update');
+        Route::delete('{educationalBackground}', [RiwayatPendidikanController::class, 'destroy'])->name('users.pendidikan.destroy');
+    });
+    Route::prefix('data_keluarga')->middleware('auth')->group(function () {
+        Route::get('', [DataKeluargaController::class, 'index'])->name('users.keluarga.create');
+        Route::post('', [DataKeluargaController::class, 'store'])->name('users.keluarga.store');
+        Route::get('{family}/edit', [DataKeluargaController::class, 'edit'])->name('users.keluarga.edit');
+        Route::put('{family}', [DataKeluargaController::class, 'update'])->name('users.keluarga.update');
+        Route::delete('{family}', [DataKeluargaController::class, 'destroy'])->name('users.keluarga.destroy');
+    });
     Route::prefix('profile')->middleware('auth')->group(function () {
         Route::get('', [MyProfileController::class, 'index'])->name('profile');
         Route::post('', [MyProfileController::class, 'update'])->name('profile.update');
