@@ -257,8 +257,8 @@
                                             <i class="icon ion-md-create"></i>
                                         </button>
                                     </a>
-                                    @endcan @can('view', $user)
-                                    <a href="{{ route('users.show', $user) }}">
+                                    @endcan
+                                    <a href="{{ route('profile-histories.index', $user) }}">
                                         <button
                                             type="button"
                                             class="btn btn-light"
@@ -266,7 +266,7 @@
                                             <i class="icon ion-md-eye"></i>
                                         </button>
                                     </a>
-                                    @endcan @can('delete', $user)
+                                     @can('delete', $user)
                                     <form
                                         action="{{ route('users.destroy', $user) }}"
                                         method="POST"
@@ -281,6 +281,15 @@
                                         </button>
                                     </form>
                                     @endcan
+
+                                    {{-- <a href="{{ route('profile-histories.index', $user) }}">
+                                        <button
+                                            type="button"
+                                            class="btn btn-light"
+                                        >
+                                            <i class="icon ion-md-eye"></i>
+                                        </button>
+                                    </a> --}}
                                 </div>
                             </td>
                         </tr>

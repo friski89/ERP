@@ -77,6 +77,7 @@ use App\Http\Controllers\Api\CompetenceLeadershipTrainingHistoriesController;
 use App\Http\Controllers\Api\CompetenceCoreValueSkillsAndProfessionsController;
 use App\Http\Controllers\Api\CompetenceFanctionalSkillsAndProfessionsController;
 use App\Http\Controllers\Api\CompetenceLeadershipSkillsAndProfessionsController;
+use App\Http\Controllers\Api\ProfileHistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -605,4 +606,25 @@ Route::name('api.')
         );
 
         Route::apiResource('cash-benefits', CashBenefitController::class);
+
+        Route::get('/profile-histories', [
+            ProfileHistoryController::class,
+            'index',
+        ])->name('profile-histories.index');
+        Route::post('/profile-histories', [
+            ProfileHistoryController::class,
+            'store',
+        ])->name('profile-histories.store');
+        Route::get('/profile-histories/{profileHistory}', [
+            ProfileHistoryController::class,
+            'show',
+        ])->name('profile-histories.show');
+        Route::put('/profile-histories/{profileHistory}', [
+            ProfileHistoryController::class,
+            'update',
+        ])->name('profile-histories.update');
+        Route::delete('/profile-histories/{profileHistory}', [
+            ProfileHistoryController::class,
+            'destroy',
+        ])->name('profile-histories.destroy');
     });

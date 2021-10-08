@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Edu;
 use App\Models\User;
-use App\Models\Edu;
 use Illuminate\Http\Request;
 use App\Models\EducationalBackground;
 use App\Http\Requests\EducationalBackgroundStoreRequest;
