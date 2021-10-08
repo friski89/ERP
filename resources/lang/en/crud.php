@@ -590,4 +590,25 @@ return [
             'name' => 'Name',
         ],
     ],
+    'profile_histories' => [
+        'name' => 'Profile Histories',
+        'index_title' => 'Profile Historiy List',
+        'new_title' => 'New Profile history',
+        'create_title' => 'Create ProfileHistory',
+        'edit_title' => 'Edit ProfileHistory',
+        'show_title' => 'Show ProfileHistory',
+        'inputs' => [
+            'id' => 'Id',
+            'gender' => 'Gender',
+            'phone_number' => 'Phone Number',
+            'blood_group' => 'Blood Group',
+            'no_ktp' => 'No Ktp',
+            'no_npwp' => 'No Npwp',
+            'address_ktp' => 'Address Ktp',
+            'address_domisili' => 'Address Domisili',
+            'status_domisili' => 'Status Domisili',
+            'user_id' => 'Name',
+            'created_at' => 'Update'
+        ],
+    ],
 ];

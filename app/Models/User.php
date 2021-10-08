@@ -225,4 +225,9 @@ class User extends Authenticatable
     {
         return $this->hasRole('super-admin');
     }
+
+    public function ProfileHistories()
+    {
+        return $this->hasMany(ProfileHistory::class);
+    }
 }

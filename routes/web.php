@@ -42,6 +42,7 @@ use App\Http\Controllers\PerformanceAppraisalHistoryController;
 use App\Http\Controllers\User\DataKeluargaController;
 use App\Http\Controllers\User\MyProfileController;
 use App\Http\Controllers\User\RiwayatPendidikanController;
+use App\Http\Controllers\ProfileHistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -213,5 +214,33 @@ Route::prefix('/')
                 OfficeFacilitiesController::class,
                 'destroy',
             ])->name('all-office-facilities.destroy');
+            Route::get('{user}/profile-histories', [
+                ProfileHistoryController::class,
+                'index',
+            ])->name('profile-histories.index');
+            Route::post('profile-histories', [
+                ProfileHistoryController::class,
+                'store',
+            ])->name('profile-histories.store');
+            Route::get('profile-histories/create', [
+                ProfileHistoryController::class,
+                'create',
+            ])->name('profile-histories.create');
+            Route::get('profile-histories/{profileHistory}', [
+                ProfileHistoryController::class,
+                'show',
+            ])->name('profile-histories.show');
+            Route::get('profile-histories/{profileHistory}/edit', [
+                ProfileHistoryController::class,
+                'edit',
+            ])->name('profile-histories.edit');
+            Route::put('profile-histories/{profileHistory}', [
+                ProfileHistoryController::class,
+                'update',
+            ])->name('profile-histories.update');
+            Route::delete('profile-histories/{profileHistory}', [
+                ProfileHistoryController::class,
+                'destroy',
+            ])->name('profile-histories.destroy');
         });
     });
